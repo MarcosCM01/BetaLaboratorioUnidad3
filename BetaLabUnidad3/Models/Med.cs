@@ -23,6 +23,8 @@ namespace BetaLabUnidad3.Models
         [DisplayName("En existencia")]
         public int existencia { get; set; }
 
+        public int pedido { get; set; }
+
         public void AgregarALista(Med medicamento)
         {
             DataAlmacenada.Instancia.ListaMed.Add(medicamento); //
@@ -35,7 +37,8 @@ namespace BetaLabUnidad3.Models
 
         public int CompareTo(object obj)
         {
-            throw new NotImplementedException();
+            var comparable = (Med)obj;
+            return id.CompareTo(comparable.id);
         }
     }
 }

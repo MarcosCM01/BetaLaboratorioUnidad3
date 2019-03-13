@@ -30,6 +30,7 @@ namespace EstructurasLineales
 
         public void AgregarHojas(Nodo<T> Raiz, Nodo<T> hijo, T hojaV)//La raiz
         {
+            //int comparar = hijo.valor.CompareTo(Raiz.valor);
             if ((int)MyDelegate.DynamicInvoke(Raiz, hijo) < 0)//Verifico si va hacia la derecha
             {
                 if (Raiz.Derecha == null) //Si el lado derecho esta vacio
@@ -82,19 +83,6 @@ namespace EstructurasLineales
 
             //ESTE METODO RETORNA 0 OR  n... ENTONCES, CUANDO LO LLAMEMOS EN EL CONTROLADOR, DEBEMOS DE PONER ANTES UN CONDICIONAL PARA QUE FUNCIONE
         }
-        /*public bool BuscarNodo(T valor)
-        {
-            var buscado = new Nodo<T>(valor);
-            var aux = RaizAux;
-            if (aux == null) { return false; }// si el arbol esta vacio o no se encontro
-
-            else if ((int)MyDelegate.DynamicInvoke(aux.valor, buscado.valor) == 0) { return true; }//Si el valor se encuentra en la raiz
-
-            else if ((int)MyDelegate.DynamicInvoke(aux.valor, buscado.valor) > 0) { aux = aux.Izquierda; return BuscarNodo(buscado.valor); }//Si es menor el dato, se vuelve a llamar
-            else { return BuscarNodo(buscado.valor); }//Si es mayor el dato, se vuelve a llamar
-            
-            //ESTE METODO RETORNA TRUE OR FALSE... ENTONCES, CUANDO LO LLAMEMOS EN EL CONTROLADOR, DEBEMOS DE PONER ANTES UN CONDICIONAL PARA QUE FUNCIONE
-        }*/
 
         public void BuscarNodoAEliminar(Nodo<T>arbol, Nodo<T>eliminado)//Envio la raiz y el nodo a eliminar
         {

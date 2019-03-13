@@ -6,6 +6,13 @@
 
 <h2>Agregar Medicamentos</h2>
 
+@Html.ActionLink("Agregar a la lista", "AgregarMed")
+
+<div class="form-group">
+    <div class="col-md-offset-2 col-md-10">
+        <input type="submit" value="Create" id="Submit" class="btn btn-default" onclick="location.href='@Url.Action("AgregarMed", "Pedidos")'" />
+    </div>
+</div>
 
 <table class="table">
     <tr>
@@ -30,27 +37,28 @@
         <th></th>
     </tr>
 
-@foreach (var item in Model) {
-    <tr>
-        <td>
-            @Html.DisplayFor(modelItem => item.Nombre)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.descripcion)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.casa)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.precio)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.existencia)
-        </td>
-        <td>
-            <input type="text" value="0" id="MedAgregado" />
-        </td>
-    </tr>
-}
+    @foreach (var item in Model)
+    {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.Nombre)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.descripcion)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.casa)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.precio)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.existencia)
+            </td>
+            <td>
+                <input type="text" value="0" id="MedAgregado" />
+            </td>
+        </tr>
+    }
 
 </table>

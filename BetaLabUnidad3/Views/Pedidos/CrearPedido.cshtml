@@ -19,7 +19,7 @@
         @Html.LabelFor(model => model.ClientName, htmlAttributes: new { @class = "control-label col-md-2" })
         <div class="col-md-10">
             @Html.EditorFor(model => model.ClientName, new { htmlAttributes = new { @class = "form-control" } })
-            @Html.ValidationMessageFor(model => model.ClientName, "", new { @class = "text-danger" })
+            @Html.ValidationMessageFor(model => model.ClientName, "Necesario llenar todos los campos", new { @class = "text-danger" })
         </div>
     </div>
 
@@ -27,7 +27,7 @@
         @Html.LabelFor(model => model.direccion, htmlAttributes: new { @class = "control-label col-md-2" })
         <div class="col-md-10">
             @Html.EditorFor(model => model.direccion, new { htmlAttributes = new { @class = "form-control" } })
-            @Html.ValidationMessageFor(model => model.direccion, "", new { @class = "text-danger" })
+            @Html.ValidationMessageFor(model => model.direccion, "Necesario llenar todos los campos", new { @class = "text-danger" })
         </div>
     </div>
 
@@ -35,7 +35,7 @@
         @Html.LabelFor(model => model.nit, htmlAttributes: new { @class = "control-label col-md-2" })
         <div class="col-md-10">
             @Html.EditorFor(model => model.nit, new { htmlAttributes = new { @class = "form-control" } })
-            @Html.ValidationMessageFor(model => model.nit, "", new { @class = "text-danger" })
+            @Html.ValidationMessageFor(model => model.nit, "Necesario llenar todos los campos", new { @class = "text-danger" })
         </div>
     </div>
 

@@ -19,9 +19,11 @@ namespace BetaLabUnidad3.Models
         [DisplayName("Casa Medica")]
         public string casa { get; set; }
         [DisplayName("Precio de Medicamento")]
-        public string precio { get; set; }
+        public double precio { get; set; }
         [DisplayName("En existencia")]
         public int existencia { get; set; }
+
+        public int pedido { get; set; }
 
         public void AgregarALista(Med medicamento)
         {
@@ -35,7 +37,8 @@ namespace BetaLabUnidad3.Models
 
         public int CompareTo(object obj)
         {
-            throw new NotImplementedException();
+            var comparable = (Med)obj;
+            return id.CompareTo(comparable.id);
         }
     }
 }

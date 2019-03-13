@@ -13,25 +13,21 @@ namespace BetaLabUnidad3.Controllers
         // GET: Pedidos
         public ActionResult Index()
         {
-            return View();
+            return View(DataAlmacenada.Instancia.ListaPedidos);
         }
 
-        // GET: Pedidos/Create
+        // GET: Pedidos/CrearPedido
         public ActionResult CrearPedido()
         {
             return View();
         }
 
-        // POST: Pedidos/Create
+        // POST: Pedidos/CrearPedido
         [HttpPost]
         public ActionResult CrearPedido(Pedidos pedido)
         {
             try
             {
-                //var Nuevo = new Pedidos();
-                //Nuevo.ClientName = collection["ClientName"];
-                //Nuevo.nit = collection["nit"];
-                //Nuevo.direccion = collection["direccion"];
 
                 if(string.IsNullOrEmpty(pedido.ClientName) || string.IsNullOrEmpty(pedido.direccion) || string.IsNullOrEmpty(pedido.nit))
                 {
@@ -47,7 +43,6 @@ namespace BetaLabUnidad3.Controllers
             }
         }
 
-
         // GET: Pedidos/AgregarMed
         public ActionResult AgregarMed()
         {
@@ -56,11 +51,39 @@ namespace BetaLabUnidad3.Controllers
 
         // POST: Pedidos/Create
         [HttpPost]
-        public ActionResult AgregarMed(FormCollection collection)
+        public ActionResult AgregarMed(FormCollection collection, Pedidos pedido)
         {
             try
             {
-                // TODO: Add insert logic here
+               foreach(var item in DataAlmacenada.Instancia.ListaMed)
+                {
+                    item.pedido = int.Parse(collection["pedido"]);
+                }
+
+               foreach(var item in DataAlmacenada.Instancia.ListaMed)
+                {
+                    if(item.pedido > 0 && item.pedido < item.existencia)
+                    {
+                        item.existencia = item.existencia - item.pedido;
+                        Med agregado = new Med();
+                        agregado.Nombre = item.Nombre;
+                        agregado.id = item.id;
+                        agregado.descripcion = item.descripcion;
+                        agregado.casa = item.casa;
+                        agregado.precio = item.precio;
+                        agregado.existencia = item.existencia;
+
+                        Pedidos pedidoAgregado = new Pedidos();
+                        pedidoAgregado.ListaMedPedido.Add(agregado);
+
+                        DataAlmacenada.Instancia.ListaPedidos.Add(pedidoAgregado);
+                    }
+                    else
+                    {
+                        ViewBag.Error = "No hay cantidad necesaria.";
+                        return View(pedido);
+                    }
+                }
                 return RedirectToAction("Index");
             }
             catch

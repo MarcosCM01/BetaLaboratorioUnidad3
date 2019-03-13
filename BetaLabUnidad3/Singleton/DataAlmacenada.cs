@@ -30,54 +30,116 @@ namespace BetaLabUnidad3.Singleton
 
         public void LecturaArchivo()
         {
-            string[] lineas = File.ReadAllLines("C:/Users/Mario/Desktop/CLASES/Ciclo III/Estructura de Datos I/Lab 3/BetaLaboratorioUnidad3/Prueba.txt");
+            string[] lineas = File.ReadAllLines("C:\\Users\\Mario\\Desktop\\CLASES\\Ciclo III\\Estructura de Datos I\\Lab 3\\BetaLaboratorioUnidad3\\Data-Laboratorio_Unidad_3.csv");
             int contador = 0;
             char[] separadores = { ','};
-            foreach(var linea in lineas)
-            {
-                if(contador>0)
-                {
-                    Med agregado = new Med();
-                    agregado.id = Convert.ToInt32(linea.Split(separadores)[0]);
-                    agregado.Nombre = linea.Split(separadores)[1];
-                    agregado.descripcion = linea.Split(separadores)[2];
-                    agregado.casa = linea.Split(separadores)[3];
-                    agregado.precio = linea.Split(separadores)[4];
-                    agregado.existencia = Convert.ToInt32(linea.Split(separadores)[5]);
-                    ListaMed.Add(agregado);
-                    contador++;
-                }
-                else
-                {
-                    contador++;
-                }
-                
-            }
-            //char[] comas = new char[20];
-            //int contadorcomas = 0; int contadorcomillas = 0;
-            //char[] comillas = new char[20];
-            //foreach(var linea in lineas)
-            //{
-            //    for (int i = 0; i < linea.Length; i++)
-            //    {
-            //        if (linea[i] == ',')
-            //        {
-            //            comas[contadorcomas] = linea[i];
-            //            contadorcomas++;
-            //        }else if (linea[i] == '"')
-            //        {
-            //            comillas[contadorcomillas] = linea[i];
-            //            contadorcomillas++;
-            //        }
-            //    }
-            //    while()
-            //}
-            
-        }
 
-        public int Comparador(char a, char b)
-        {
-            return a.CompareTo(b);
+            foreach (var linea in lineas)
+            {
+                Med tmp = new Med();
+
+                if(contador > 0)
+                {
+                    int i = 0;  //Variables para contador de id
+
+                    //ID
+                    while (linea[i] != ',')
+                    {
+                        i++;
+                    }
+                    tmp.id = int.Parse(linea.Substring(0, i));
+                    i++;
+
+                    //NOMBRE
+                    int i2 = i; //Variables para contador de nombre
+                    if (linea[i] == '"')
+                    {
+                        while (linea[i + 1] != '"') { i++; }
+                        tmp.Nombre = linea.Substring(i2 + 1, i - i2);
+                        i += 3;
+                    }
+                    else
+                    {
+                        while (linea[i] != ',')
+                        {
+                            i++;
+                        }
+                        tmp.Nombre = linea.Substring(i2, i - i2);
+                        i++;
+                    }
+
+
+                    //DESCRIPCION
+                    int i3 = i; //Variables para contador de la descripcion
+                    if (linea[i] == '"')
+                    {
+                        while (linea[i + 1] != '"') { i++; }
+                        tmp.descripcion = linea.Substring(i3 + 1, i - i3);
+                        i += 3;
+                    }
+                    else
+                    {
+                        while (linea[i] != ',')
+                        {
+                            i++;
+                        }
+                        tmp.descripcion = linea.Substring(i3, i - i3);
+                        i++;
+                    }
+
+                    //CASA PRODUCTORA
+                    int i4 = i; //Variables para contador de la casa productora
+                    if (linea[i] == '"')
+                    {
+                        while (linea[i + 1] != '"') { i++; }
+                        tmp.casa = linea.Substring(i4 + 1, i - i4);
+                        i += 3;
+                    }
+                    else
+                    {
+                        while (linea[i] != ',')
+                        {
+                            i++;
+                        }
+                        tmp.casa = linea.Substring(i4, i - i4);
+                        i++;
+                    }
+
+                    //PRECIO
+                    int i5 = i; //Variables para contador de la casa productora
+                    if (linea[i] == '"')
+                    {
+                        while (linea[i + 1] != '"') { i++; }
+                        tmp.precio = double.Parse(linea.Substring(i5 + 2, i - i5 - 1));
+                        i += 2;
+                    }
+                    else
+                    {
+                        while (linea[i] != ',')
+                        {
+                            i++;
+                        }
+                        tmp.precio = double.Parse(linea.Substring(i5 + 1, i - i5 - 1));
+                        i++;
+                    }
+
+                    //EXISTENCIA
+                    if (linea[linea.Length - 2] == ',')
+                    {
+                        tmp.existencia = int.Parse(linea.Substring(linea.Length - 1));
+                    }
+                    else
+                    {
+                        tmp.existencia = int.Parse(linea.Substring(linea.Length - 2));
+                    }
+
+                    ListaMed.Add(tmp);
+                    ArbolMed.AgregarNodoR(tmp);
+                }
+                else { contador++; }
+
+                
+            }  
         }
 
     }

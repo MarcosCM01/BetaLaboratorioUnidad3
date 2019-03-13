@@ -10,6 +10,8 @@ namespace BetaLabUnidad3.Models
 {
     public class Pedidos : IComparable
     {
+        //[DisplayName("Medicamentos Agregados")]
+        public List<Med> ListaMedPedido { get; set; }
         [DisplayName("Nombre del cliente")]
         public string ClientName { get; set; }
         [DisplayName("Direccion de residencia")]
@@ -20,7 +22,8 @@ namespace BetaLabUnidad3.Models
         public double total { get; set; }
         [DisplayName("Medicamentos Agregados")]
         public List<Med> ListaAgregar { get; set; }
-        public string Medicamentos { get; set; }
+
+        public int pedido { get; set; }
 
         public List<Med> nuevo = new List<Med>(); 
         //Lista de pedidos

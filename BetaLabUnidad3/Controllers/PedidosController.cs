@@ -16,22 +16,18 @@ namespace BetaLabUnidad3.Controllers
             return View();
         }
 
-        // GET: Pedidos/Create
+        // GET: Pedidos/CrearPedido
         public ActionResult CrearPedido()
         {
             return View();
         }
 
-        // POST: Pedidos/Create
+        // POST: Pedidos/CrearPedido
         [HttpPost]
         public ActionResult CrearPedido(Pedidos pedido)
         {
             try
             {
-                //var Nuevo = new Pedidos();
-                //Nuevo.ClientName = collection["ClientName"];
-                //Nuevo.nit = collection["nit"];
-                //Nuevo.direccion = collection["direccion"];
 
                 if(string.IsNullOrEmpty(pedido.ClientName) || string.IsNullOrEmpty(pedido.direccion) || string.IsNullOrEmpty(pedido.nit))
                 {

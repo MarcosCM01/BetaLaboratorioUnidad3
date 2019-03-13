@@ -19,7 +19,7 @@ namespace BetaLabUnidad3.Models
         [DisplayName("Casa Medica")]
         public string casa { get; set; }
         [DisplayName("Precio de Medicamento")]
-        public string precio { get; set; }
+        public double precio { get; set; }
         [DisplayName("En existencia")]
         public int existencia { get; set; }
 

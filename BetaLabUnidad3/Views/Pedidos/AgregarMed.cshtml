@@ -6,6 +6,9 @@
 
 <h2>Agregar Medicamentos</h2>
 
+<input type="button"
+       value="Agregar medicamentos al pedido"
+       onclick="location.href='<%: Url.Action(" Action", "Controller" ) %/>
 
 <table class="table">
     <tr>
@@ -30,27 +33,28 @@
         <th></th>
     </tr>
 
-@foreach (var item in Model) {
-    <tr>
-        <td>
-            @Html.DisplayFor(modelItem => item.Nombre)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.descripcion)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.casa)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.precio)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.existencia)
-        </td>
-        <td>
-            <input type="text" value="0" id="MedAgregado" />
-        </td>
-    </tr>
-}
+    @foreach (var item in Model)
+    {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.Nombre)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.descripcion)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.casa)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.precio)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.existencia)
+            </td>
+            <td>
+                <input type="text" value="0" id="MedAgregado" />
+            </td>
+        </tr>
+    }
 
 </table>

@@ -24,7 +24,7 @@ namespace BetaLabUnidad3.Controllers
 
         // POST: Pedidos/CrearPedido
         [HttpPost]
-        public ActionResult CrearPedido(Pedidos pedido)
+        public ActionResult CrearPedido(FormCollection collection, Pedidos pedido)
         {
             try
             {
@@ -34,8 +34,16 @@ namespace BetaLabUnidad3.Controllers
                     ViewBag.Error = "Se necesita llenar todos los campos vacios";
                     return View(pedido);
                 }
-                DataAlmacenada.Instancia.ListaPedidos.Add(pedido);
-                return RedirectToAction("AgregarMed");
+                else
+                {
+                    //DataAlmacenada.Instancia.ListaPedidos.Add(pedido);
+                    TempData["ClientName"] = pedido.ClientName;
+                    TempData["direccion"] = pedido.direccion;
+                    TempData["nit"] = pedido.nit;
+                    return RedirectToAction("AgregarMed");
+                }
+
+                
             }
             catch
             {
@@ -57,7 +65,7 @@ namespace BetaLabUnidad3.Controllers
             {
                foreach(var item in DataAlmacenada.Instancia.ListaMed)
                 {
-                    item.pedido = int.Parse(collection["pedido"]);
+                    item.pedido = int.Parse(collection["MedAgregado"]);
                 }
 
                foreach(var item in DataAlmacenada.Instancia.ListaMed)
@@ -65,6 +73,7 @@ namespace BetaLabUnidad3.Controllers
                     if(item.pedido > 0 && item.pedido < item.existencia)
                     {
                         item.existencia = item.existencia - item.pedido;
+
                         Med agregado = new Med();
                         agregado.Nombre = item.Nombre;
                         agregado.id = item.id;
@@ -74,6 +83,10 @@ namespace BetaLabUnidad3.Controllers
                         agregado.existencia = item.existencia;
 
                         Pedidos pedidoAgregado = new Pedidos();
+                        pedidoAgregado.nit = Convert.ToString(TempData["nit"]);
+                        pedidoAgregado.ClientName = Convert.ToString(TempData["ClientName"]);
+                        pedidoAgregado.direccion = Convert.ToString(TempData["direccion"]);
+
                         pedidoAgregado.ListaMedPedido.Add(agregado);
 
                         DataAlmacenada.Instancia.ListaPedidos.Add(pedidoAgregado);

@@ -38,10 +38,26 @@ namespace BetaLabUnidad3.Controllers
             }
         }
 
-        // GET: Med/Edit/5
-        public ActionResult Edit(int id)
+
+
+        // GET: Med/Create
+        public ActionResult Buscar()
         {
-            return View();
+            return RedirectToAction("CrearPedido", "Pedidos");
+        }
+
+        // POST: Med/Create
+        [HttpPost]
+        public ActionResult Buscar(FormCollection collection)
+        {
+            try
+            {
+                return RedirectToAction("CrearPedido", "Pedidos");
+            }
+            catch
+            {
+                return View();
+            }
         }
 
 

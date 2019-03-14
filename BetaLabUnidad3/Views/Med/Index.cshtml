@@ -6,6 +6,17 @@
 
 <h2>Lista de Medicamentos</h2>
 
+<h3>BUSQUEDA</h3>
+
+<ul>
+    @using (Html.BeginForm("Buscar", "Trabajadores", FormMethod.Post))
+    {
+        <input type="text" name="nombre" id="nombre" />
+
+        <input type="submit" value="Buscar por nombre" />
+    }
+</ul>
+
 <p>
     @Html.ActionLink("Crear Pedido", "Create")
 </p>
@@ -32,27 +43,28 @@
         <th></th>
     </tr>
 
-@foreach (var item in Model) {
-    <tr>
-        <td>
-            @Html.DisplayFor(modelItem => item.id)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.Nombre)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.descripcion)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.casa)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.precio)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.existencia)
-        </td>
-    </tr>
-}
+    @foreach (var item in Model)
+    {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.id)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Nombre)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.descripcion)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.casa)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.precio)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.existencia)
+            </td>
+        </tr>
+    }
 
 </table>

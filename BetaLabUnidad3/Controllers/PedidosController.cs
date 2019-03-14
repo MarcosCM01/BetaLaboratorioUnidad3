@@ -31,7 +31,7 @@ namespace BetaLabUnidad3.Controllers
 
                 if(string.IsNullOrEmpty(pedido.ClientName) || string.IsNullOrEmpty(pedido.direccion) || string.IsNullOrEmpty(pedido.nit))
                 {
-                    ViewBag.Error = "Se necesita llenar todos los campos vacios";
+                    ViewBag.Error = "Se necesita llenar todos los campos";
                     return View(pedido);
                 }
                 DataAlmacenada.Instancia.ListaPedidos.Add(pedido);
@@ -56,12 +56,12 @@ namespace BetaLabUnidad3.Controllers
             try
             {
                foreach(var item in DataAlmacenada.Instancia.ListaMed)
-                {
+               {
                     item.pedido = int.Parse(collection["pedido"]);
-                }
+               }
 
                foreach(var item in DataAlmacenada.Instancia.ListaMed)
-                {
+               {
                     if(item.pedido > 0 && item.pedido < item.existencia)
                     {
                         item.existencia = item.existencia - item.pedido;
@@ -83,7 +83,7 @@ namespace BetaLabUnidad3.Controllers
                         ViewBag.Error = "No hay cantidad necesaria.";
                         return View(pedido);
                     }
-                }
+               }
                 return RedirectToAction("Index");
             }
             catch

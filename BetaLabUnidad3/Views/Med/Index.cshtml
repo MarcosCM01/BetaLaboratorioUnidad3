@@ -6,9 +6,27 @@
 
 <h2>Lista de Medicamentos</h2>
 
-<p>
-    @Html.ActionLink("Crear Pedido", "Create")
-</p>
+
+<div class="form-group"> <!--Este boton sirve para la creacion de pedidos-->
+    <div class="col-md-2 col-md-offset-0" >
+        <input type="submit" value="Agregar Pedido" id="Submit" class="btn btn-default" onclick="location.href='@Url.Action("CrearPedido", "Pedidos")'" />
+
+    </div>
+</div>
+<div class="form-group"><!--Este boton sirve para la visualizacion de los pedidos-->
+    <div class="col-md-2">
+        <input type="submit" value="Lista de Pedidos" id="Submit" class="btn btn-default" onclick="location.href='@Url.Action("Index", "Pedidos")'" />
+    </div>
+</div>
+
+<div class="form-group">
+    <!--Este boton sirve para la visualizacion de los pedidos-->
+    <div class="col-md-8">
+        <input type="submit" value="Busqueda de farmacos" id="Submit" class="btn btn-default" onclick="location.href='@Url.Action("Index","Pedidos")'" />
+    </div>
+</div>
+
+
 <table class="table">
     <tr>
         <th>
@@ -32,27 +50,28 @@
         <th></th>
     </tr>
 
-@foreach (var item in Model) {
-    <tr>
-        <td>
-            @Html.DisplayFor(modelItem => item.id)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.Nombre)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.descripcion)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.casa)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.precio)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.existencia)
-        </td>
-    </tr>
-}
+    @foreach (var item in Model)
+    {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.id)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Nombre)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.descripcion)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.casa)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.precio)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.existencia)
+            </td>
+        </tr>
+    }
 
 </table>

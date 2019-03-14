@@ -4,13 +4,13 @@
     ViewBag.Title = "AgregarMed";
 }
 
-<h2>Agregar Medicamentos</h2>
+<h2>Seleccione los medicamentos</h2>
 
 @Html.ActionLink("Agregar a la lista", "AgregarMed")
 
 <div class="form-group">
     <div class="col-md-offset-2 col-md-10">
-        <input type="submit" value="Create" id="Submit" class="btn btn-default" onclick="location.href='@Url.Action("AgregarMed", "Pedidos")'" />
+        <input type="submit" value="Pasar a caja" id="Submit" class="btn btn-default" onclick="location.href='@Url.Action("Index", "Pedidos")'" />
     </div>
 </div>
 
@@ -56,7 +56,11 @@
                 @Html.DisplayFor(modelItem => item.existencia)
             </td>
             <td>
-                <input type="text" value="0" id="MedAgregado" />
+                @using (Html.BeginForm("AgregarMed", "Pedidos", FormMethod.Post))
+                {
+                    <input type="text" value="0" name="nombre" id="MedAgregado"/>
+                    <input type="submit" value="Agregar Medicamento"/>
+                }
             </td>
         </tr>
     }

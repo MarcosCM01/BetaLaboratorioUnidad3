@@ -4,8 +4,13 @@
     ViewBag.Title = "Index";
 }
 
-<h2>Lista de Pedidos Realizados</h2>
+<h2>Lista de Pedidos en caja</h2>
 
+<div class="form-group"><!--Boton para regresar a la lista-->
+    <div class="col-md-offset-1 col-md-1">
+        <input type="submit" value="Regresar a lista" id="Submit" class="btn btn-default" onclick="location.href='@Url.Action("Index", "Med")'" />
+    </div>
+</div>
 
 <table class="table">
     <tr>

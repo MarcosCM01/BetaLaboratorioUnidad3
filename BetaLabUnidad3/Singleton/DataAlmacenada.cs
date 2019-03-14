@@ -30,7 +30,7 @@ namespace BetaLabUnidad3.Singleton
 
         public void LecturaArchivo()
         {
-            string[] lineas = File.ReadAllLines("C:\\Users\\Mario\\Desktop\\CLASES\\Ciclo III\\Estructura de Datos I\\Lab 3\\BetaLaboratorioUnidad3\\Data-Laboratorio_Unidad_3.csv");
+            string[] lineas = File.ReadAllLines("C:/Users/Marcos Andrés CM/Desktop/Laboratorio Unidad 3/BetaLaboratorioUnidad3/Data-Laboratorio_Unidad_3.csv");
             int contador = 0;
             char[] separadores = { ','};
 

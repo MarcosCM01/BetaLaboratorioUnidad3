@@ -24,18 +24,26 @@ namespace BetaLabUnidad3.Controllers
 
         // POST: Pedidos/CrearPedido
         [HttpPost]
-        public ActionResult CrearPedido(Pedidos pedido)
+        public ActionResult CrearPedido(FormCollection collection, Pedidos pedido)
         {
             try
             {
 
-                if(string.IsNullOrEmpty(pedido.ClientName) || string.IsNullOrEmpty(pedido.direccion) || string.IsNullOrEmpty(pedido.nit))
+                if (string.IsNullOrEmpty(pedido.ClientName) || string.IsNullOrEmpty(pedido.direccion) || string.IsNullOrEmpty(pedido.nit))
                 {
-                    ViewBag.Error = "Se necesita llenar todos los campos";
+                    ViewBag.Error = "Campos obligatorios";
                     return View(pedido);
                 }
-                DataAlmacenada.Instancia.ListaPedidos.Add(pedido);
-                return RedirectToAction("AgregarMed");
+                else
+                {
+                    //DataAlmacenada.Instancia.ListaPedidos.Add(pedido);
+                    TempData["ClientName"] = pedido.ClientName;
+                    TempData["direccion"] = pedido.direccion;
+                    TempData["nit"] = pedido.nit;
+                    return RedirectToAction("AgregarMed");
+                }
+
+
             }
             catch
             {
@@ -44,46 +52,45 @@ namespace BetaLabUnidad3.Controllers
         }
 
         // GET: Pedidos/AgregarMed
-        public ActionResult AgregarMed()
+        public ActionResult AgregarMed(string ClientName)//
         {
+            foreach (var item in DataAlmacenada.Instancia.ListaMed)
+            {
+                if (item.Nombre == ClientName)
+                {
+                    item.existencia--;
+
+                    Pedidos pedidoAgregado = new Pedidos();
+                    pedidoAgregado.nit = Convert.ToString(TempData["nit"]);
+                    pedidoAgregado.ClientName = Convert.ToString(TempData["ClientName"]);
+                    pedidoAgregado.direccion = Convert.ToString(TempData["direccion"]);
+
+                    pedidoAgregado.ListaMedPedido = item.Nombre + "\n";
+                    pedidoAgregado.total += item.precio;
+
+                    DataAlmacenada.Instancia.ListaPedidos.Add(pedidoAgregado);
+                }
+                else
+                {
+                    ViewBag.Error = "No hay cantidad necesaria.";
+                    //return View(DataAlmacenada.Instancia.ListaMed);
+                }
+            }
             return View(DataAlmacenada.Instancia.ListaMed);
         }
 
         // POST: Pedidos/Create
         [HttpPost]
-        public ActionResult AgregarMed(FormCollection collection, Pedidos pedido)
+        public ActionResult AgregarMed(string ClientName, FormCollection collection, Pedidos pedido)
         {
             try
             {
-               foreach(var item in DataAlmacenada.Instancia.ListaMed)
-               {
-                    item.pedido = int.Parse(collection["pedido"]);
-               }
+                //foreach(var item in DataAlmacenada.Instancia.ListaMed)
+                // {
+                //     item.pedido = int.Parse(collection["MedAgregado"]);
+                // }
 
-               foreach(var item in DataAlmacenada.Instancia.ListaMed)
-               {
-                    if(item.pedido > 0 && item.pedido < item.existencia)
-                    {
-                        item.existencia = item.existencia - item.pedido;
-                        Med agregado = new Med();
-                        agregado.Nombre = item.Nombre;
-                        agregado.id = item.id;
-                        agregado.descripcion = item.descripcion;
-                        agregado.casa = item.casa;
-                        agregado.precio = item.precio;
-                        agregado.existencia = item.existencia;
 
-                        Pedidos pedidoAgregado = new Pedidos();
-                        pedidoAgregado.ListaMedPedido.Add(agregado);
-
-                        DataAlmacenada.Instancia.ListaPedidos.Add(pedidoAgregado);
-                    }
-                    else
-                    {
-                        ViewBag.Error = "No hay cantidad necesaria.";
-                        return View(pedido);
-                    }
-               }
                 return RedirectToAction("Index");
             }
             catch

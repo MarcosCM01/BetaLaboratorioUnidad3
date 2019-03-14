@@ -13,7 +13,13 @@ namespace BetaLabUnidad3.Controllers
         // GET: Med
         public ActionResult Index()
         {
-            DataAlmacenada.Instancia.LecturaArchivo();
+            bool n = false;
+            if (n == false)
+            {
+                DataAlmacenada.Instancia.LecturaArchivo();
+                n = true;
+            }
+            
             return View(DataAlmacenada.Instancia.ListaMed); //Cargamos la lista 
         }
 
@@ -38,10 +44,37 @@ namespace BetaLabUnidad3.Controllers
             }
         }
 
-        // GET: Med/Edit/5
-        public ActionResult Edit(int id)
+
+
+        public ActionResult Buscar(string nombre)
         {
-            return View();
+            var MedBuscado = new Med();
+            MedBuscado.Nombre = nombre;
+            int indice = DataAlmacenada.Instancia.ArbolMed.CrearNodo(MedBuscado.Nombre, MedBuscado.id);
+
+            foreach (var item in DataAlmacenada.Instancia.ListaMed)
+            {
+                if (indice == item.id)
+                {
+                    DataAlmacenada.Instancia.MedBuscados.Add(item);
+                }
+            }
+
+            return View(DataAlmacenada.Instancia.MedBuscados);
+        }
+
+        // POST: Med/Create
+        [HttpPost]
+        public ActionResult Buscar(FormCollection collection)
+        {
+            try
+            {
+                return RedirectToAction("CrearPedido", "Pedidos");
+            }
+            catch
+            {
+                return View();
+            }
         }
 
 

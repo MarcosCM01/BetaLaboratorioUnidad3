@@ -7,7 +7,7 @@
 <h2>Search</h2>
 
 <p>
-    @Html.ActionLink("Create New", "Create")
+    @Html.ActionLink("Regresar a lista", "Index")
 </p>
 <table class="table">
     <tr>
@@ -26,9 +26,7 @@
         <th>
             @Html.DisplayNameFor(model => model.existencia)
         </th>
-        <th>
-            @Html.DisplayNameFor(model => model.pedido)
-        </th>
+
         <th></th>
     </tr>
 
@@ -49,14 +47,7 @@
         <td>
             @Html.DisplayFor(modelItem => item.existencia)
         </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.pedido)
-        </td>
-        <td>
-            @Html.ActionLink("Edit", "Edit", new { id=item.id }) |
-            @Html.ActionLink("Details", "Details", new { id=item.id }) |
-            @Html.ActionLink("Delete", "Delete", new { id=item.id })
-        </td>
+
     </tr>
 }
 

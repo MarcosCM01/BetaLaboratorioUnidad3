@@ -10,8 +10,9 @@ namespace BetaLabUnidad3.Models
 {
     public class Pedidos : IComparable
     {
-        //[DisplayName("Medicamentos Agregados")]
-        public List<Med> ListaMedPedido { get; set; }
+        [DisplayName("Medicamentos Agregados")]
+        public string ListaMedPedido { get; set; }
+
         [DisplayName("Nombre del cliente")]
         public string ClientName { get; set; }
         [DisplayName("Direccion de residencia")]
@@ -20,22 +21,18 @@ namespace BetaLabUnidad3.Models
         public string nit { get; set; }
         [DisplayName("Total a despachar")]
         public double total { get; set; }
-        [DisplayName("Medicamentos Agregados")]
-        public List<Med> ListaAgregar { get; set; }
 
-        public int pedido { get; set; }
-
-        public List<Med> nuevo = new List<Med>(); 
         //Lista de pedidos
         public void AgregarALista(Med medicamento)
         {
-            DataAlmacenada.Instancia.ListaMed.Add(medicamento); 
+            DataAlmacenada.Instancia.ListaMed.Add(medicamento);
         }
 
-        public void AgregarAArbol(Med medicamento)
+        public void AgregarAPedidos(Pedidos medicamento)
         {
-            DataAlmacenada.Instancia.ArbolMed.AgregarNodoR(medicamento);
+            DataAlmacenada.Instancia.ListaPedidos.Add(medicamento);
         }
+
         public int CompareTo(object obj)
         {
             throw new NotImplementedException();

@@ -8,9 +8,9 @@ namespace EstructurasLineales
 {
     interface Interfaz<T>
     {
-        void AgregarNodoR(T valor);
-        void AgregarHojas(Nodo<T> Arbol, Nodo<T> hijo, T hojaV);
-        void CrearNodo(T valor);
+        void AgregarNodoR(string valor);
+        void AgregarHojas(Nodo<T> Arbol, Nodo<T> hijo, string hojaV);
+        int  CrearNodo(string valor, int id);
         int BuscadorNodo(Nodo<T> raiz, Nodo<T> nodo);
         void BuscarNodoAEliminar(Nodo<T> arbol, Nodo<T> eliminado);//Metodo para encontrar la ubicacion del metodo a eliminar
         void Borrar(Nodo<T> borrado); //Metodo que SI elimina el nodo

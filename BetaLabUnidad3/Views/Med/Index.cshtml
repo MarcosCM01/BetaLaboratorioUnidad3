@@ -6,27 +6,24 @@
 
 <h2>Lista de Medicamentos</h2>
 
+<h3>BUSQUEDA</h3>
 
-<div class="form-group"> <!--Este boton sirve para la creacion de pedidos-->
-    <div class="col-md-2 col-md-offset-0" >
-        <input type="submit" value="Agregar Pedido" id="Submit" class="btn btn-default" onclick="location.href='@Url.Action("CrearPedido", "Pedidos")'" />
+<ul>
+    @using (Html.BeginForm("Buscar", "Med", FormMethod.Get))
+    {
+        <input type="text" name="nombre" id="nombre" />
 
-    </div>
-</div>
-<div class="form-group"><!--Este boton sirve para la visualizacion de los pedidos-->
-    <div class="col-md-2">
-        <input type="submit" value="Lista de Pedidos" id="Submit" class="btn btn-default" onclick="location.href='@Url.Action("Index", "Pedidos")'" />
-    </div>
-</div>
+        <input type="submit" value="Buscar por nombre" />
+    }
+</ul>
 
-<div class="form-group">
-    <!--Este boton sirve para la visualizacion de los pedidos-->
-    <div class="col-md-8">
-        <input type="submit" value="Busqueda de farmacos" id="Submit" class="btn btn-default" onclick="location.href='@Url.Action("Index","Pedidos")'" />
-    </div>
-</div>
+<p>
+    @Html.ActionLink("Crear Pedido", "Create")
+</p>
 
-
+<p>
+    @Html.ActionLink("Lista Pedidos", "Index", "Pedidos")
+</p>
 <table class="table">
     <tr>
         <th>
@@ -34,12 +31,6 @@
         </th>
         <th>
             @Html.DisplayNameFor(model => model.Nombre)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.descripcion)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.casa)
         </th>
         <th>
             @Html.DisplayNameFor(model => model.precio)
@@ -59,12 +50,7 @@
             <td>
                 @Html.DisplayFor(modelItem => item.Nombre)
             </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.descripcion)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.casa)
-            </td>
+
             <td>
                 @Html.DisplayFor(modelItem => item.precio)
             </td>

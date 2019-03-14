@@ -7,12 +7,12 @@ using System.Threading.Tasks;
 
 namespace EstructurasLineales
 {
-    public class ArbolBinario<T> : Interfaz<T>, IEnumerable<T> where T : IComparable
+    public class ArbolBinario<T> : Interfaz<T> where T : IComparable
     {
         public Nodo<T> RaizAux { get; set; }//Para formar el arbol
         public ArbolBinario() { RaizAux = null; }//Metodo constructor
 
-        public void AgregarNodoR(T value)//El que quiero insertar, su papa, su valor
+        public void AgregarNodoR(string value)//El que quiero insertar, su papa, su valor
         {
             var Nodo = new Nodo<T>(value);
             if (RaizAux ==  null)//Raiz pura del arbol
@@ -28,7 +28,7 @@ namespace EstructurasLineales
             }
         }
 
-        public void AgregarHojas(Nodo<T> Raiz, Nodo<T> hijo, T hojaV)//La raiz
+        public void AgregarHojas(Nodo<T> Raiz, Nodo<T> hijo, string hojaV)//La raiz
         {
             //int comparar = hijo.valor.CompareTo(Raiz.valor);
             if ((int)MyDelegate.DynamicInvoke(Raiz, hijo) < 0)//Verifico si va hacia la derecha
@@ -60,25 +60,27 @@ namespace EstructurasLineales
                     AgregarHojas(Raiz.Izquierda, hijo, hojaV);
                 }
             }
-            else if ((int)MyDelegate.DynamicInvoke(Raiz, hijo) == 0)//Verifico que sean iguales
+            /*else if ((int)MyDelegate.DynamicInvoke(Raiz, hijo) == 0)
             {
-                throw new DuplicateWaitObjectException("DUPLICADOS NO EXISTEN EN ARBOL"); 
-            }
+                //EXISTEN DUPLICADOS. EJEMPLO: LINEAS 7 Y 34
+                throw new DuplicateWaitObjectException("DUPLICADOS NO EXISTEN EN ARBOL");
+            }*/
+
         }      
 
-        public void CrearNodo(T valor) //METODO A LLAMAR CUANDO SE BUSQUE UN FARMACO
+        public int  CrearNodo(string valor, int id) //METODO A LLAMAR CUANDO SE BUSQUE UN FARMACO
         {
             var Nodo = new Nodo<T>(valor);
-            BuscadorNodo(RaizAux, Nodo);
+            return BuscadorNodo(RaizAux, Nodo);
         }
 
         public int  BuscadorNodo(Nodo<T>Raiz, Nodo<T>nodo)
         {
             if (Raiz == null) { return 0; }// si el arbol esta vacio o no se encontro
 
-            else if ((int)MyDelegate.DynamicInvoke(Raiz.valor, nodo.valor) == 0) { return nodo.posicion; }//Si el valor se encuentra en la raiz
+            else if (Raiz.valor.CompareTo(nodo.valor) == 0) { return nodo.posicion; }//Si el valor se encuentra en la raiz
 
-            else if ((int)MyDelegate.DynamicInvoke(Raiz.valor, nodo.valor) > 0) { return BuscadorNodo(Raiz.Izquierda, nodo); }//Si es menor el dato, se vuelve a llamar
+            else if (Raiz.valor.CompareTo(nodo.valor) > 0) { return BuscadorNodo(Raiz.Izquierda, nodo); }//Si es menor el dato, se vuelve a llamar
             else { return BuscadorNodo(Raiz.Derecha, nodo); }//Si es mayor el dato, se vuelve a llamar
 
             //ESTE METODO RETORNA 0 OR  n... ENTONCES, CUANDO LO LLAMEMOS EN EL CONTROLADOR, DEBEMOS DE PONER ANTES UN CONDICIONAL PARA QUE FUNCIONE
@@ -154,20 +156,7 @@ namespace EstructurasLineales
             destruido.Derecha = null;
             destruido.Izquierda = null;
         }
-        public IEnumerator<T> GetEnumerator()
-        {
-            var NodoAux = RaizAux;
-            while (NodoAux != null)
-            {
-                yield return NodoAux.valor;
-                NodoAux = NodoAux.Derecha;
-            }
-        }
-
-        IEnumerator IEnumerable.GetEnumerator()
-        {
-            return GetEnumerator();
-        }
+       
 
         //Metodos de comparacion entre nodos que actuaran como delegados
         public static Comparison<Nodo<T>> CompareByName = delegate (Nodo<T> n1, Nodo<T> n2)

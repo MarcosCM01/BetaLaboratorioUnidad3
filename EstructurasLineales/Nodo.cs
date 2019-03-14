@@ -19,9 +19,9 @@ namespace EstructurasLineales
         public Nodo<T> Anterior { get; set; }
 
         public int posicion { get; set; } //Id del farmaco
-        public T valor { get; set; }//Nombre del farmaco
+        public string valor { get; set; }//Nombre del farmaco
 
-        public  Nodo (T value) //Metodo constructor
+        public  Nodo (string value) //Metodo constructor
         {
             this.Derecha = null;
             this.Izquierda = null;

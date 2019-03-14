@@ -25,12 +25,12 @@ namespace BetaLabUnidad3.Singleton
         public List<Pedidos> ListaPedidos = new List<Pedidos>(); //LISTA PARA ALMACENAR TODA LA INFO DEL FARMACO
         public EstructurasLineales.ArbolBinario<Med> ArbolMed = new EstructurasLineales.ArbolBinario<Med>(); //INSTANCIAS PARA ALMACENAR EL NOMBRE E ID DEL FARMACO EN ARBOL 
         public List<Med> FarmacosEliminados = new List<Med>(); //LISTA AUXILIAR PARA ALMACENAR LOS FARMACOS QUE YA NO TIENEN EN EXISTENCIA, Y SERVIRAN PARA REABASTECER
+        public List<Med> MedBuscados = new List<Med>();
 
-        
 
         public void LecturaArchivo()
         {
-            string[] lineas = File.ReadAllLines("C:/Users/Marcos Andrés CM/Desktop/Laboratorio Unidad 3/BetaLaboratorioUnidad3/Data-Laboratorio_Unidad_3.csv");
+            string[] lineas = File.ReadAllLines("C:/Users/Marcos Andrés CM/Desktop/Version 4.0/EstructuraLab2/BetaLabUnidad3/Data-Laboratorio_Unidad_3.csv");
             int contador = 0;
             char[] separadores = { ','};
 
@@ -134,7 +134,7 @@ namespace BetaLabUnidad3.Singleton
                     }
 
                     ListaMed.Add(tmp);
-                    ArbolMed.AgregarNodoR(tmp);
+                    ArbolMed.AgregarNodoR(tmp.Nombre);
                 }
                 else { contador++; }
 

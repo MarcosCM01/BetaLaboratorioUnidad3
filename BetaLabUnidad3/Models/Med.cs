@@ -32,7 +32,7 @@ namespace BetaLabUnidad3.Models
 
         public void AgregarAArbol(Med medicamento)
         {
-            DataAlmacenada.Instancia.ArbolMed.AgregarNodoR(medicamento);
+            DataAlmacenada.Instancia.ArbolMed.AgregarNodoR(medicamento.Nombre);
         }
 
         public int CompareTo(object obj)
